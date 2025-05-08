@@ -13,7 +13,7 @@ moves = [
 
 size = (8,8)
 tour = [[1,1,-1]] # x, y, next move idx (ordered)
-
+count = 0
 
 def main(screen):
     # No cursor
@@ -52,7 +52,7 @@ def main(screen):
             win.addch(size[1] - pos[1] + 1, (pos[0] * 2), ord(n))
         win.refresh()
 
-    count = 0
+    global count
     while len(tour) < (size[0] * size[1]):
         tour[-1][2] +=1
         if tour[-1][2] == len(moves):
@@ -72,4 +72,5 @@ def main(screen):
 
 if __name__ == '__main__':
     curses.wrapper(main)
+    print("Solved in %s moves" % count)
     print(tour)
