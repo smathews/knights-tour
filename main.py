@@ -1,14 +1,14 @@
 import curses
 
 moves = [
+    (1,-2),
+    (-2,1),
+    (-1,2),
+    (2,-1),
     (-2,-1),
     (2,1),
     (-1,-2),
     (1,2),
-    (-1,2),
-    (1,-2),
-    (-2,1),
-    (2,-1),
 ]
 
 size = (8,8)
@@ -65,7 +65,7 @@ def main(screen):
             tour.append(n)
             # print some output
             count += 1
-            if count & (2**14 - 1) == 0:
+            if count & (2**10 - 1) == 0:
                 screen.addstr(0,0,"Move number: %s" % count)
                 screen.refresh()
                 render(tour, win)
