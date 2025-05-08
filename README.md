@@ -18,6 +18,8 @@ Find the best iteration of the algorithm.
 
 ## Example
 
+![Running Knights](./doc/materials/running.png)
+
 ```cli
 smathews@SM-S11PRO:~/Projects/github.com/smathews/knights-tour$ python3 main.py all
 Solved in 1332 moves
