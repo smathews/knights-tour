@@ -1,4 +1,4 @@
-import curses,time
+import curses
 
 moves = [
     (-2,-1),
