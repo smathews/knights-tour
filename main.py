@@ -1,17 +1,26 @@
+import curses,time
+
 moves = [
-   (2,1),
-   (1,2),
-   (2,-1),
-   (1,-2),
-   (-1,2),
-   (-2,1),
-   (-1,-2),
-   (-2,-1)
+    (-2,-1),
+    (2,1),
+    (-1,-2),
+    (1,2),
+    (-1,2),
+    (1,-2),
+    (-2,1),
+    (2,-1),
 ]
 
-def main():
-    size = (8,8)
-    tour = [[1,1,-1]] # x, y, next move idx (ordered)
+size = (8,8)
+tour = [[1,1,-1]] # x, y, next move idx (ordered)
+
+
+def main(screen):
+    # No cursor
+    curses.curs_set(0)
+
+    screen.clear()
+    win = curses.newwin(size[1] + 2, (size[0] * 2) + 3, 2, 3)
 
     def visited(pos):
         for p in tour:
@@ -33,6 +42,16 @@ def main():
         dx,dy = moves[pos[2]]
         return [x+dx, y+dy, -1]
 
+    def render(tour, win):
+        win.clear()
+        win.box()
+        for pos in tour:
+            n = str(pos[2])
+            if n == "-1":
+                n = "N"
+            win.addch(size[1] - pos[1] + 1, (pos[0] * 2), ord(n))
+        win.refresh()
+
     count = 0
     while len(tour) < (size[0] * size[1]):
         tour[-1][2] +=1
@@ -46,11 +65,11 @@ def main():
             tour.append(n)
             # print some output
             count += 1
-            if count & (2**16 - 1) == 0:
-                print(tour)
-                # print(".",end="",flush=True)
-    
-    print(tour)
+            if count & (2**14 - 1) == 0:
+                screen.addstr(0,0,"Move number: %s" % count)
+                screen.refresh()
+                render(tour, win)
 
-if __name__ == "__main__":
-  main()
+if __name__ == '__main__':
+    curses.wrapper(main)
+    print(tour)
