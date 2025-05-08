@@ -15,7 +15,7 @@ size = (8,8)
 start = [1,1,-1]
 best_count = 0
 best_iteration = moves
-bset_tour = []
+best_tour = []
 
 def main(screen):
     # No cursor
